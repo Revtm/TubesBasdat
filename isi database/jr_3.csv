@@ -1,12 +1,12 @@
-JR118200015;Reza Rahadiyan;2000-12-21;085369237098;A201;JR118200015@asrama.itera.ac.id;Sumatera Barat;Padang;Jl. Timun;Asma,Tifus;P11;SR;TM;TF;TK;TB
-JR118200016;Alexia Adri	;1999-12-08;085369211098;B201;JR118200016@asrama.itera.ac.id;Lampung;Metro;Jl. Ikan Berwarna;DBD;P12;SR;TM;TF;TK;TB
-JR118210002;Budi Hidayat;2000-05-23;085369237298;A201;JR118210002@asrama.itera.ac.id;Banten;Tanggerang;	Jl. Meteorit;Tidak Ada;P12;SR;TM;TF;TK	;TB
-JR118220010;Sunarto Uzumaki;2000-01-27;085369237048;A202;JR118220010@asrama.itera.ac.id;DKI Jakarta;Jakarta;Jl. Ninja;Pilek;P21;SR;TM;TF;TK;	TB
-JR118230025;Yucup  Rizaldo;1999-11-02;085369237492;A202;JR118230025@asrama.itera.ac.id;Jawa Tengah;Semarang;Jl. Kuyaja;Asma,Pilek;P22;SR;TM;TF;TK;TB
-JR118240026;Riani ;2000-08-18;085369227098;B201;JR118240026@asrama.itera.ac.id;Jawa Barat;Depok;Jl. Macet;Tifus;P12;SR;TM;TF;TK;TB
-JR118240031;Hanifah;2001-01-09;085369237093;B202;JR118240031@asrama.itera.ac.id;Jambi;Jambi;Jl. Raden;Tidak Ada;P21;SR;TM;TF;TK;TB
-JR118240060;Putri;2000-12-12;085369234088;B202;JR118240060@asrama.itera.ac.id;Bali;Denpasar;Jl. Sambung-Menyambung;Tidak Ada;P22;SR;TM	;TF;TK;TB
-JR118250032;Mario Kartono;1999-10-07;085169234088;A203;JR118250032@asrama.itera.ac.id;Lampung;Kotabumi;Jl. Salak;Tidak Ada;P12;SR;TM;TF;TK;TB
-JR118250033;Rio Pradana;2000-03-24;085369234087;A203;JR118250033@asrama.itera.ac.id;Sumatera Barat;Bukit Tinggi;Jl. Pahlawan;Maag;P22;SR;TM;TF;TK;TB
-JR118250034;Shinta Agustina;1999-09-21;085369234388;B203;JR118250034@asrama.itera.ac.id;Jawa Tengah;Kebumen;Jl. Lurus;Tidak Ada;P11;SR;TM;TF;TK;TB
-JR118250035;Cantika Berliana;2000-06-12;085369234090;B203;JR118250035@asrama.itera.ac.id;Jawa Barat;Bogor;Jl. Rambutan;Asma;P22;SR;TM;TF;TK;TB
+JR118200015;Reza Rahadiyan;2000-12-21;L;85369237098;A201;JR118200015@asrama.itera.ac.id;Sumatera Barat;Padang;Jl. Timun;P11;SR121170001;TM_01;TF_01;TK_01;TB_01
+JR118200016;Alexia Adri	;1999-12-08;P;85369211098;B201;JR118200016@asrama.itera.ac.id;Lampung;Metro;Jl. Ikan Berwarna;P12;SR121170007;TM_02;TF_02;TK_02;TB_02
+JR118210002;Budi Hidayat;2000-05-23;L;85369237298;A201;JR118210002@asrama.itera.ac.id;Banten;Tanggerang;Jl. Meteorit;P12;SR131170008;TM_01;TF_01;TK_01;TB_01
+JR118220010;Sunarto Uzumaki;2000-01-27;L;85369237048;A202;JR118220010@asrama.itera.ac.id;DKI Jakarta;Jakarta;Jl. Ninja;P21;SR141170009;TM_02;TF_02;TK_02;TB_02
+JR118230025;Yucup  Rizaldo;1999-11-02;L;85369237492;A202;JR118230025@asrama.itera.ac.id;Jawa Tengah;Semarang;Jl. Kuyaja;P22;SR141171201;TM_01;TF_01;TK_01;TB_01
+JR118240026;Riani ;2000-08-18;P;85369227098;B201;JR118240026@asrama.itera.ac.id;Jawa Barat;Depok;Jl. Macet;P12;SR211170801;TM_02;TF_02;TK_02;TB_02
+JR118240031;Tini;2001-01-09;P;85369237093;B202;JR118240031@asrama.itera.ac.id;Jambi;Jambi;Jl. Raden;P21;SR221171100;TM_01;TF_01;TK_01;TB_01
+JR118240060;Putri;2000-12-12;P;85369234088;B202;JR118240060@asrama.itera.ac.id;Bali;Denpasar;Jl. Sambung-Menyambung;P22;SR221170101;TM_02;TF_02;TK_02;TB_02
+JR118250032;Mario Kartono;1999-10-07;L;85169234088;A203;JR118250032@asrama.itera.ac.id;Lampung;Kotabumi;Jl. Salak;P12;SR121170001;TM_01;TF_01;TK_01;TB_01
+JR118250033;Rio Pradana;2000-03-24;L;85369234087;A203;JR118250033@asrama.itera.ac.id;Sumatera Barat;Bukit Tinggi;Jl. Pahlawan;P22;SR131170008;TM_02;TF_02;TK_02;TB_02
+JR118250034;Shinta Agustina;1999-09-21;P;85369234388;B203;JR118250034@asrama.itera.ac.id;Jawa Tengah;Kebumen;Jl. Lurus;P11;SR121170007;TM_01;TF_01;TK_01;TB_01
+JR118250035;Cantika Berliana;2000-06-12;P;85369234090;B203;JR118250035@asrama.itera.ac.id;Jawa Barat;Bogor;Jl. Rambutan;P22;SR211170801;TM_02;TF_02;TK_02;TB_02
