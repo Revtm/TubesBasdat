@@ -60,7 +60,7 @@ public class menuUtama extends javax.swing.JFrame {
                     obj[1] = res.getString("tgl_lahir");
                     obj[2] = res.getString("jenis_kelamin");
                     obj[3] = res.getString("prov");
-                    System.out.println(Stat);
+                   
                     model.addRow(obj);
                 }
             }else{
@@ -95,13 +95,23 @@ public class menuUtama extends javax.swing.JFrame {
         tulis = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cari = new javax.swing.JButton();
+        status = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelASM = new javax.swing.JTable();
-        status = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(tulis);
+        tulis.setBounds(310, 240, 344, 20);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cari Nama Penghuni");
+        jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(70, 240, 130, 20);
 
         cari.setText("Cari");
         cari.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +119,19 @@ public class menuUtama extends javax.swing.JFrame {
                 cariActionPerformed(evt);
             }
         });
+        getContentPane().add(cari);
+        cari.setBounds(670, 240, 51, 20);
+
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(status);
+        status.setBounds(206, 240, 100, 20);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(1630, 310, 0, 2);
 
         TabelASM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,51 +146,12 @@ public class menuUtama extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelASM);
 
-        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        status.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                statusMouseClicked(evt);
-            }
-        });
-        status.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(260, 280, 440, 150);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tulis, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cari))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(189, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tulis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(cari)
-                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(314, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/asrama.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, -10, 870, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -176,6 +160,7 @@ public class menuUtama extends javax.swing.JFrame {
         // TODO add your handling code here:
         tampilan();
         tulis.setText("");
+        TabelASM.show();
     }//GEN-LAST:event_cariActionPerformed
 
     private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
@@ -183,10 +168,6 @@ public class menuUtama extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_statusActionPerformed
-
-    private void statusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statusMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusMouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,7 +208,9 @@ public class menuUtama extends javax.swing.JFrame {
     private javax.swing.JTable TabelASM;
     private javax.swing.JButton cari;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField tulis;
     // End of variables declaration//GEN-END:variables
