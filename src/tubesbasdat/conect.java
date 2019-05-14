@@ -5,10 +5,7 @@
  */
 package tubesbasdat;
 import java.sql.*;
-/**
- *
- * @author Windows 10
- */
+
 public class conect {
     private static Connection con ;
     public static Connection getConect(){
