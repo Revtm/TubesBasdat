@@ -11,8 +11,7 @@ import java.sql.*;
  */
 public class conect {
     private static Connection con ;
-    
-    public Connection getConnect(){
+    public static Connection getConect(){
         try{
             con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama","root","");
         }catch (SQLException err){

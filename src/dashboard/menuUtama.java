@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package dashboard;
-import tubesbasdat.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import tubesbasdat.conect;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,17 +19,48 @@ import javax.swing.table.*;
  * @author Windows 10
  */
 public class menuUtama extends javax.swing.JFrame {
-
+    DefaultTableModel model;
     /**
      * Creates new form menuUtama
      */
     public menuUtama() {
         initComponents();
-    }
-    
-    public void tampilan(){
+        setLocationRelativeTo(null);
+        
+        model = new DefaultTableModel();
+        TabelASM.setModel(model);
+        model.addColumn("Nama");
+        model.addColumn("TTL");
+        model.addColumn("Jenis Kelamin");
+        model.addColumn("Asal");
         
     }
+    
+    public   void tampilan(){
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        
+        try{
+            
+            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama","root","");
+            Statement stat =con.createStatement();
+            String sql = "SELECT * FROM jr_asrama where nama like '"+tulis.getText()+"%'";
+            ResultSet res = stat.executeQuery(sql);
+            
+            while(res.next()){
+                Object[] obj = new Object[4];
+                obj[0] = res.getString("nama");
+                obj[1] = res.getString("tgl_lahir");
+                obj[2] = res.getString("jenis_kelamin");
+                obj[3] = res.getString("prov");
+                
+                model.addRow(obj);
+            }
+        }catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +82,11 @@ public class menuUtama extends javax.swing.JFrame {
         jLabel1.setText("Cari Nama Penghuni");
 
         cari.setText("Cari");
+        cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cariActionPerformed(evt);
+            }
+        });
 
         TabelASM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,12 +128,18 @@ public class menuUtama extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(cari))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(314, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
+        // TODO add your handling code here:
+        tampilan();
+        tulis.setText("");
+    }//GEN-LAST:event_cariActionPerformed
 
     /**
      * @param args the command line arguments
