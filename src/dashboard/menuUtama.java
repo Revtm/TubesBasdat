@@ -99,19 +99,18 @@ public class menuUtama extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelASM = new javax.swing.JTable();
+        login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
-        getContentPane().add(tulis);
-        tulis.setBounds(310, 240, 344, 20);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(tulis, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 344, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cari Nama Penghuni");
         jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 240, 130, 20);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 130, 20));
 
         cari.setText("Cari");
         cari.addActionListener(new java.awt.event.ActionListener() {
@@ -119,8 +118,7 @@ public class menuUtama extends javax.swing.JFrame {
                 cariActionPerformed(evt);
             }
         });
-        getContentPane().add(cari);
-        cari.setBounds(670, 240, 51, 20);
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, -1, 20));
 
         status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         status.addActionListener(new java.awt.event.ActionListener() {
@@ -128,10 +126,8 @@ public class menuUtama extends javax.swing.JFrame {
                 statusActionPerformed(evt);
             }
         });
-        getContentPane().add(status);
-        status.setBounds(206, 240, 100, 20);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(1630, 310, 0, 2);
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 240, 100, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1630, 310, -1, -1));
 
         TabelASM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,12 +142,18 @@ public class menuUtama extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelASM);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(260, 280, 440, 150);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 440, 150));
+
+        login.setText("Login");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/asrama.jpg"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, -10, 870, 470);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 870, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -168,6 +170,12 @@ public class menuUtama extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_statusActionPerformed
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        // TODO add your handling code here:
+        //dispose();
+        new login().show();
+    }//GEN-LAST:event_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +219,7 @@ public class menuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton login;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField tulis;
     // End of variables declaration//GEN-END:variables
