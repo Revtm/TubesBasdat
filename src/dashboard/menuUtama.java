@@ -74,9 +74,9 @@ public class menuUtama extends javax.swing.JFrame {
     public String getStat(){
        
          if(status.getSelectedItem()=="Junior"){
-            Stat="jr_asrama";
+            Stat="JR_Asrama";
         }else if(status.getSelectedItem()=="Senior"){
-            Stat="sr_asrama";
+            Stat="SR_Asrama";
         }   
          return Stat;
         
