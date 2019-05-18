@@ -10,7 +10,7 @@ public class conect {
     private static Connection con ;
     public static Connection getConect(){
         try{
-            con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama","root","");
+            con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama_v3","root","");
         }catch (SQLException err){
             System.out.println(err.getMessage());
         }
