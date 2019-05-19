@@ -7,3 +7,6 @@
 #Penambahan panel SR 18/05/19 (Revtm) </br >
 #Edit panel SR 18/05/19 (Revtm) </br >
 penambahan class DAO dan pengembahan halaman SR </br >
+#Revisi class login dan menuUtama(mhafidhhaq)
+-tambah dan perbaiki kode program
+-tambah dan edit tampilan menu
