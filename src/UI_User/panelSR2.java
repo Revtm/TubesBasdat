@@ -5,40 +5,18 @@
  */
 package UI_User;
 
-import DAO.DAOuser;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-import pengguna.user;
-
 /**
  *
  * @author revan
  */
-public class panelSR extends javax.swing.JPanel {
-    Connection con;
-    user pengguna;
-    panelSR2 pn2;
+public class panelSR2 extends javax.swing.JPanel {
+    panelSR pn1;
     /**
      * Creates new form panelSR
      */
-    public panelSR() {
+    public panelSR2(panelSR pn1) {
+        this.pn1 = pn1;
         initComponents();
-    }
-    
-    public panelSR(Connection con, user pengguna, panelSR2 pn2) {
-        this.con = con;
-        this.pengguna = pengguna;
-        this.pn2 = pn2;
-        initComponents();
-        this.labelNama.setText(this.pengguna.getNama());
-        this.labelNIM.setText(this.pengguna.getID());
-        
-        this.tampilTabelTutor(this.con, this.pengguna);
-        this.tampilTabelBina(this.con, this.pengguna);
     }
 
     /**
@@ -57,13 +35,12 @@ public class panelSR extends javax.swing.JPanel {
         buttonPenghuni = new javax.swing.JButton();
         labelNama = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableTutor = new javax.swing.JTable();
+        buttonCari = new javax.swing.JButton();
+        fieldCari = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableBina = new javax.swing.JTable();
-        labelBina = new javax.swing.JLabel();
-        labelMainPage = new javax.swing.JLabel();
-        labelJadwalTutor = new javax.swing.JLabel();
+        tableCari = new javax.swing.JTable();
+        labelCari = new javax.swing.JLabel();
+        labelCariPenghuni = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(720, 560));
         setPreferredSize(new java.awt.Dimension(720, 560));
@@ -78,7 +55,7 @@ public class panelSR extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Teknik Informatika");
 
-        buttonMainPage.setBackground(new java.awt.Color(173, 92, 0));
+        buttonMainPage.setBackground(new java.awt.Color(116, 62, 0));
         buttonMainPage.setForeground(new java.awt.Color(255, 255, 255));
         buttonMainPage.setText("Main Page");
         buttonMainPage.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +64,7 @@ public class panelSR extends javax.swing.JPanel {
             }
         });
 
-        buttonPenghuni.setBackground(new java.awt.Color(116, 62, 0));
+        buttonPenghuni.setBackground(new java.awt.Color(173, 92, 0));
         buttonPenghuni.setForeground(new java.awt.Color(255, 255, 255));
         buttonPenghuni.setText("Penghuni");
         buttonPenghuni.addActionListener(new java.awt.event.ActionListener() {
@@ -129,31 +106,20 @@ public class panelSR extends javax.swing.JPanel {
                 .addComponent(buttonMainPage)
                 .addGap(18, 18, 18)
                 .addComponent(buttonPenghuni)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMinimumSize(new java.awt.Dimension(548, 560));
 
-        tableTutor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mata Kuliah", "Jadwal", "ID kelas"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        buttonCari.setText("Cari");
+        buttonCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCariActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(tableTutor);
 
-        tableBina.setModel(new javax.swing.table.DefaultTableModel(
+        tableCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -169,15 +135,13 @@ public class panelSR extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tableBina);
+        jScrollPane2.setViewportView(tableCari);
 
-        labelBina.setText("Anggota JR Binaan");
+        labelCari.setText("Hasil Pencarian");
 
-        labelMainPage.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        labelMainPage.setForeground(new java.awt.Color(116, 62, 0));
-        labelMainPage.setText("Main Page");
-
-        labelJadwalTutor.setText("Jadwal Tutorial");
+        labelCariPenghuni.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        labelCariPenghuni.setForeground(new java.awt.Color(116, 62, 0));
+        labelCariPenghuni.setText("Cari Penghuni");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -186,27 +150,29 @@ public class panelSR extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMainPage)
-                    .addComponent(labelJadwalTutor)
-                    .addComponent(labelBina)
+                    .addComponent(labelCariPenghuni)
+                    .addComponent(labelCari)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonCari, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(labelMainPage)
-                .addGap(44, 44, 44)
-                .addComponent(labelJadwalTutor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(labelBina)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addComponent(labelCariPenghuni)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCari))
+                .addGap(28, 28, 28)
+                .addComponent(labelCari)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -228,64 +194,33 @@ public class panelSR extends javax.swing.JPanel {
 
     private void buttonMainPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMainPageActionPerformed
         // TODO add your handling code here:
-        this.setVisible(true);
+       
         
     }//GEN-LAST:event_buttonMainPageActionPerformed
 
     private void buttonPenghuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPenghuniActionPerformed
         // TODO add your handling code here:
-        
-       
+        this.setVisible(true);
     }//GEN-LAST:event_buttonPenghuniActionPerformed
 
-    private void tampilTabelTutor(Connection con, user pengguna){
-        DAOuser dao = new DAOuser(this.con, this.pengguna);
-        ResultSet rs = dao.tampilTutorialSR();
-        
-        DefaultTableModel model= (DefaultTableModel) this.tableTutor.getModel();
-        try {
-            while(rs.next()){
-                Object[]obj ={rs.getString("matakuliah"), rs.getString("jadwal"), rs.getString("id_kelas")};
-                
-                model.addRow(obj);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    private void tampilTabelBina(Connection con, user pengguna){
-        DAOuser dao = new DAOuser(this.con, this.pengguna);
-        ResultSet rs = dao.tampilBinaanSR();
-        
-        DefaultTableModel model= (DefaultTableModel) this.tableBina.getModel();
-        try {
-            while(rs.next()){
-                Object[]obj ={rs.getString("nama"), rs.getString("no_ruangan"), rs.getString("no_telp")};
-                
-                model.addRow(obj);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+    private void buttonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCariActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCari;
     private javax.swing.JButton buttonMainPage;
     private javax.swing.JButton buttonPenghuni;
+    private javax.swing.JTextField fieldCari;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelBina;
-    private javax.swing.JLabel labelJadwalTutor;
-    private javax.swing.JLabel labelMainPage;
+    private javax.swing.JLabel labelCari;
+    private javax.swing.JLabel labelCariPenghuni;
     private javax.swing.JLabel labelNIM;
     private javax.swing.JLabel labelNama;
-    private javax.swing.JTable tableBina;
-    private javax.swing.JTable tableTutor;
+    private javax.swing.JTable tableCari;
     // End of variables declaration//GEN-END:variables
 }
