@@ -20,7 +20,6 @@ import javax.swing.table.*;
  */
 public class menuUtama extends javax.swing.JFrame {
     DefaultTableModel model;
-    String Stat;
     /**
      * Creates new form menuUtama
      */
@@ -42,16 +41,29 @@ public class menuUtama extends javax.swing.JFrame {
        // status.requestFocus();
     }
     
-    public   void tampilan(){
+    public void tampilan(){
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
         
         try{
             
-            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama","root","");
+            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama_v3","root","");
             Statement stat =con.createStatement();
-            if(status.getSelectedItem()=="Senior"||status.getSelectedItem()=="Junior"){
-                String sql = "SELECT * FROM "+getStat()+" where nama like '"+tulis.getText()+"%'";
+            if(status.getSelectedItem()=="Senior"){
+                String sql = "SELECT * FROM penghuni_asrama where id_penghuni like 'SR%' and nama like '"+tulis.getText()+"%'";
+                ResultSet res = stat.executeQuery(sql);
+            
+                while(res.next()){
+                    Object[] obj = new Object[4];
+                    obj[0] = res.getString("nama");
+                    obj[1] = res.getString("tgl_lahir");
+                    obj[2] = res.getString("jenis_kelamin");
+                    obj[3] = res.getString("prov");
+                   
+                    model.addRow(obj);
+                }
+            }else if(status.getSelectedItem()=="Junior"){
+                String sql = "SELECT * FROM penghuni_asrama where id_penghuni like 'JR%' and nama like '"+tulis.getText()+"%'";
                 ResultSet res = stat.executeQuery(sql);
             
                 while(res.next()){
@@ -69,17 +81,6 @@ public class menuUtama extends javax.swing.JFrame {
         }catch(SQLException err){
             JOptionPane.showMessageDialog(null, err.getMessage());
         }
-    }
-    
-    public String getStat(){
-       
-         if(status.getSelectedItem()=="Junior"){
-            Stat="jr_asrama";
-        }else if(status.getSelectedItem()=="Senior"){
-            Stat="sr_asrama";
-        }   
-         return Stat;
-        
     }
     
 
@@ -103,14 +104,16 @@ public class menuUtama extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Utama");
+        setPreferredSize(new java.awt.Dimension(810, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(tulis, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 344, -1));
+        getContentPane().add(tulis, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 344, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cari Nama Penghuni");
         jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 130, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 130, 20));
 
         cari.setText("Cari");
         cari.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +121,7 @@ public class menuUtama extends javax.swing.JFrame {
                 cariActionPerformed(evt);
             }
         });
-        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, -1, 20));
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 220, -1, 20));
 
         status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         status.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +129,7 @@ public class menuUtama extends javax.swing.JFrame {
                 statusActionPerformed(evt);
             }
         });
-        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 240, 100, -1));
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 100, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1630, 310, -1, -1));
 
         TabelASM.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,7 +145,7 @@ public class menuUtama extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelASM);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 440, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 440, 150));
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
