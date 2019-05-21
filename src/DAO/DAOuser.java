@@ -55,4 +55,20 @@ public class DAOuser {
         }
         return rs;
     }
+    
+    public ResultSet cariPenghuniAdv(String cari){
+        String sql = "select id_penghuni,nama,no_ruangan from Penghuni_Asrama where nama like '%"+cari+"%' OR id_penghuni like '%"+cari+"%';";
+        
+        Statement stmt;
+        ResultSet rs = null;
+        try {
+            stmt = this.con.createStatement();
+            rs = stmt.executeQuery(sql);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOuser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+        
+    }
 }

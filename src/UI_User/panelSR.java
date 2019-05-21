@@ -29,7 +29,7 @@ public class panelSR extends javax.swing.JPanel {
         initComponents();
     }
     
-    public panelSR(Connection con, user pengguna, panelSR2 pn2) {
+    public panelSR(Connection con, user pengguna) {
         this.con = con;
         this.pengguna = pengguna;
         this.pn2 = pn2;
@@ -53,8 +53,6 @@ public class panelSR extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         labelNIM = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        buttonMainPage = new javax.swing.JButton();
-        buttonPenghuni = new javax.swing.JButton();
         labelNama = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,24 +76,6 @@ public class panelSR extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Teknik Informatika");
 
-        buttonMainPage.setBackground(new java.awt.Color(173, 92, 0));
-        buttonMainPage.setForeground(new java.awt.Color(255, 255, 255));
-        buttonMainPage.setText("Main Page");
-        buttonMainPage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonMainPageActionPerformed(evt);
-            }
-        });
-
-        buttonPenghuni.setBackground(new java.awt.Color(116, 62, 0));
-        buttonPenghuni.setForeground(new java.awt.Color(255, 255, 255));
-        buttonPenghuni.setText("Penghuni");
-        buttonPenghuni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPenghuniActionPerformed(evt);
-            }
-        });
-
         labelNama.setForeground(new java.awt.Color(255, 255, 255));
         labelNama.setText("M Iqbal Revantama");
 
@@ -106,15 +86,10 @@ public class panelSR extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNIM)
-                            .addComponent(jLabel6)
-                            .addComponent(labelNama))
-                        .addGap(0, 32, Short.MAX_VALUE))
-                    .addComponent(buttonPenghuni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonMainPage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(labelNIM)
+                    .addComponent(jLabel6)
+                    .addComponent(labelNama))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,10 +100,6 @@ public class panelSR extends javax.swing.JPanel {
                 .addComponent(labelNIM)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addGap(116, 116, 116)
-                .addComponent(buttonMainPage)
-                .addGap(18, 18, 18)
-                .addComponent(buttonPenghuni)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -226,18 +197,6 @@ public class panelSR extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonMainPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMainPageActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(true);
-        
-    }//GEN-LAST:event_buttonMainPageActionPerformed
-
-    private void buttonPenghuniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPenghuniActionPerformed
-        // TODO add your handling code here:
-        
-       
-    }//GEN-LAST:event_buttonPenghuniActionPerformed
-
     private void tampilTabelTutor(Connection con, user pengguna){
         DAOuser dao = new DAOuser(this.con, this.pengguna);
         ResultSet rs = dao.tampilTutorialSR();
@@ -273,8 +232,6 @@ public class panelSR extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonMainPage;
-    private javax.swing.JButton buttonPenghuni;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -5,6 +5,7 @@
  */
 package UI_User;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,10 +30,8 @@ public class testPanelSR extends javax.swing.JFrame {
         conect kon = new conect();
         this.con = kon.getConect();
         
-        
-        
         user penggunaa = new penghuniSR();
-        String sql = "select * from Penghuni_Asrama where id_penghuni = 'SR141170009';";
+        String sql = "select * from Penghuni_Asrama where id_penghuni = 'SR211170801';";
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -49,7 +48,7 @@ public class testPanelSR extends javax.swing.JFrame {
         }
         
         initComponents();
-        this.panelSR21.setVisible(false);
+        this.panelSR2.setVisible(false);
         
     }
 
@@ -63,60 +62,129 @@ public class testPanelSR extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        panelSR1 = new UI_User.panelSR(this.con, this.pengguna, this.panelSR21);
-        panelSR21 = new UI_User.panelSR2(this.panelSR1);
+        jPanel1 = new javax.swing.JPanel();
+        buttonCari = new javax.swing.JButton();
+        buttonMain = new javax.swing.JButton();
+        panelSR = new UI_User.panelSR(this.con,this.pengguna);
+        panelSR2 = new UI_User.panelSR2(this.con,this.pengguna);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLayeredPane1.setLayer(panelSR1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(panelSR21, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanel1.setOpaque(false);
+
+        buttonCari.setBackground(new java.awt.Color(116, 62, 0));
+        buttonCari.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCari.setText("cari");
+        buttonCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCariActionPerformed(evt);
+            }
+        });
+
+        buttonMain.setBackground(new java.awt.Color(116, 62, 0));
+        buttonMain.setForeground(new java.awt.Color(255, 255, 255));
+        buttonMain.setText("main menu");
+        buttonMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMainActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(buttonMain)
+                .addGap(28, 28, 28)
+                .addComponent(buttonCari)
+                .addGap(24, 24, 24))
+        );
+
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(panelSR, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(panelSR2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(549, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelSR1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(panelSR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelSR21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(panelSR2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelSR1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(panelSR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelSR21, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(panelSR2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(jLayeredPane1)
-                    .addGap(0, 0, 0)))
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(jLayeredPane1)
-                    .addGap(0, 0, 0)))
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMainActionPerformed
+        // TODO add your handling code here:
+        this.panelSR.setVisible(true);
+        this.panelSR2.setVisible(false);
+        this.buttonMain.setBackground(new java.awt.Color(173, 92, 0));
+        this.buttonCari.setBackground(new java.awt.Color(116, 62, 0));
+    }//GEN-LAST:event_buttonMainActionPerformed
+
+    private void buttonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariActionPerformed
+        // TODO add your handling code here:
+        this.panelSR.setVisible(false);
+        this.panelSR2.setVisible(true);
+        this.buttonCari.setBackground(new java.awt.Color(173, 92, 0));
+        this.buttonMain.setBackground(new java.awt.Color(116, 62, 0));
+    }//GEN-LAST:event_buttonCariActionPerformed
+
     
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments173, 92, 0
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -151,8 +219,11 @@ public class testPanelSR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCari;
+    private javax.swing.JButton buttonMain;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private UI_User.panelSR panelSR1;
-    private UI_User.panelSR2 panelSR21;
+    private javax.swing.JPanel jPanel1;
+    private UI_User.panelSR panelSR;
+    private UI_User.panelSR2 panelSR2;
     // End of variables declaration//GEN-END:variables
 }
