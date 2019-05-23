@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dashboard;
+import UI_User.testPanelSR;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import tubesbasdat.conect;
@@ -20,6 +21,7 @@ import javax.swing.table.*;
  */
 public class menuUtama extends javax.swing.JFrame {
     DefaultTableModel model;
+    Connection con;
     /**
      * Creates new form menuUtama
      */
@@ -93,6 +95,9 @@ public class menuUtama extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        u = new javax.swing.JTextField();
+        login = new javax.swing.JButton();
+        p = new javax.swing.JPasswordField();
         tulis = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cari = new javax.swing.JButton();
@@ -100,13 +105,26 @@ public class menuUtama extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelASM = new javax.swing.JTable();
-        login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Utama");
         setPreferredSize(new java.awt.Dimension(810, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        u.setText("ussername");
+        getContentPane().add(u, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 180, -1));
+
+        login.setText("login");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+
+        p.setText("password");
+        getContentPane().add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 180, -1));
         getContentPane().add(tulis, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 344, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -147,14 +165,6 @@ public class menuUtama extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 440, 150));
 
-        login.setText("Login");
-        login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
-            }
-        });
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/asrama.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 870, 470));
 
@@ -176,8 +186,36 @@ public class menuUtama extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
-        //dispose();
-        new login().show();
+        conect kon = new conect();
+        this.con=kon.getConect();
+        
+        try{
+            Statement stat=this.con.createStatement();
+            String sql_1 = "select * from akun where id_akun ='"+u.getText()
+                    +"' and password ='"+p.getText()+"'";
+            ResultSet rset= stat.executeQuery(sql_1);
+                   
+            if (rset.next()){
+                if(u.getText().contains("SR")){
+                    dispose();
+                testPanelSR test = new testPanelSR();
+                test.setVisible(true);
+                }else if(u.getText().contains("JR")){
+                    dispose();
+                //testPanelJR test = new testPanelJR(); MENUNGGU PANEL JR
+                //test.setVisible(true);
+                }else if(u.getText().contains("AD")){
+                    dispose();
+                //testPanelAD test = new testPanelAD(); MENUNGGU PANEL ADMIN
+                //test.setVisible(true);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Maaf Password Atau Ussername Salah");
+            }
+        }catch(SQLException er){
+            JOptionPane.showMessageDialog(null, er.getMessage());
+        }
     }//GEN-LAST:event_loginActionPerformed
 
     /**
@@ -223,7 +261,9 @@ public class menuUtama extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton login;
+    private javax.swing.JPasswordField p;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField tulis;
+    private javax.swing.JTextField u;
     // End of variables declaration//GEN-END:variables
 }
