@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/D:/Informatika/Smester%204/Basis%20Data/Tubes3/TubesBasdat/src/UI_JR/Tampilan_JR_Tutor.java</file>
             <file>file:/D:/Informatika/Smester%204/Basis%20Data/Tubes3/TubesBasdat/src/UI_JR/Tampilan_JR1.java</file>
             <file>file:/D:/Informatika/Smester%204/Basis%20Data/Tubes3/TubesBasdat/src/dashboard/menuUtama.java</file>
             <file>file:/D:/Informatika/Smester%204/Basis%20Data/Tubes3/TubesBasdat/src/DAO/DAOuser.java</file>
             <file>file:/D:/Informatika/Smester%204/Basis%20Data/Tubes3/TubesBasdat/src/UI_JR/Tampilan_JRCari.java</file>
             <file>file:/D:/Informatika/Smester%204/Basis%20Data/Tubes3/TubesBasdat/src/UI_User/panelIdentitas.java</file>
+=======
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/testList_SR_Paket.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/testPanelSR.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/panelSR.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/panelIdentitas.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

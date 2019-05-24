@@ -208,7 +208,7 @@ public class menuUtama extends javax.swing.JFrame {
             if (rset.next()){
                 if(u.getText().contains("SR")){
                     dispose();
-                testPanelSR test = new testPanelSR();
+                testPanelSR test = new testPanelSR(this.con, u.getText());
                 test.setVisible(true);
                 }else if(u.getText().contains("JR")){
                     dispose();

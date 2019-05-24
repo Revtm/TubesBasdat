@@ -5,6 +5,8 @@
  */
 package UI_User;
 
+import DAO.DAOuser;
+import dashboard.menuUtama;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -53,6 +55,39 @@ public class testPanelSR extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
     }
+    
+    public testPanelSR(Connection con, String id) {
+       
+        this.con = con;
+        
+        user penggunaa = new penghuniSR();
+        String sql = "select * from penghuni_asrama where id_penghuni = '"+id+"';";
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                penggunaa.setID(rs.getString("id_penghuni"));
+                penggunaa.setNama(rs.getString("nama"));
+            }
+            
+            DAOuser dao = new DAOuser(this.con, penggunaa);
+            
+            this.pengguna = dao.getIdentitas(penggunaa.getID());
+            //this.pengguna = penggunaa;
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(testPanelSR.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        initComponents();
+        this.panelSR2.setVisible(false);
+        
+        setLocationRelativeTo(null);
+        
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +102,8 @@ public class testPanelSR extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonCari = new javax.swing.JButton();
         buttonMain = new javax.swing.JButton();
+        buttonProfil = new javax.swing.JButton();
+        buttonLogout = new javax.swing.JButton();
         panelSR = new UI_User.panelSR(this.con,this.pengguna);
         panelSR2 = new UI_User.panelCariPenghuni(this.con,this.pengguna);
 
@@ -92,6 +129,24 @@ public class testPanelSR extends javax.swing.JFrame {
             }
         });
 
+        buttonProfil.setBackground(new java.awt.Color(116, 62, 0));
+        buttonProfil.setForeground(new java.awt.Color(255, 255, 255));
+        buttonProfil.setText("profil");
+        buttonProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonProfilActionPerformed(evt);
+            }
+        });
+
+        buttonLogout.setBackground(new java.awt.Color(116, 62, 0));
+        buttonLogout.setForeground(new java.awt.Color(255, 255, 255));
+        buttonLogout.setText("Logout");
+        buttonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,18 +154,24 @@ public class testPanelSR extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                    .addComponent(buttonCari, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(buttonMain, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(buttonProfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(buttonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(buttonMain)
                 .addGap(28, 28, 28)
+                .addComponent(buttonMain)
+                .addGap(18, 18, 18)
+                .addComponent(buttonProfil)
+                .addGap(18, 18, 18)
                 .addComponent(buttonCari)
-                .addGap(24, 24, 24))
+                .addGap(18, 18, 18)
+                .addComponent(buttonLogout)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -141,7 +202,7 @@ public class testPanelSR extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(220, 220, 220)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(0, 0, 0)
@@ -184,6 +245,32 @@ public class testPanelSR extends javax.swing.JFrame {
         this.buttonMain.setBackground(new java.awt.Color(116, 62, 0));
     }//GEN-LAST:event_buttonCariActionPerformed
 
+    private void buttonProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProfilActionPerformed
+        // TODO add your handling code here:
+        
+        
+         
+        
+        panelIdentitas idenJR = new panelIdentitas(this.pengguna);
+        idenJR.setVisible(true);
+    }//GEN-LAST:event_buttonProfilActionPerformed
+
+    private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
+     try {
+         // TODO add your handling code here:
+         this.con.close();
+         dispose();
+         
+         menuUtama menu= new menuUtama();
+         menu.setVisible(true);
+         
+     } catch (SQLException ex) {
+         Logger.getLogger(testPanelSR.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        
+        
+    }//GEN-LAST:event_buttonLogoutActionPerformed
+
     
     /**
      * @param args the command line arguments173, 92, 0
@@ -222,7 +309,9 @@ public class testPanelSR extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCari;
+    private javax.swing.JButton buttonLogout;
     private javax.swing.JButton buttonMain;
+    private javax.swing.JButton buttonProfil;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private UI_User.panelSR panelSR;
