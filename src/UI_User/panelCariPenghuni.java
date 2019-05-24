@@ -50,7 +50,6 @@ public class panelCariPenghuni extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         labelNIM = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         labelNama = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         buttonCari = new javax.swing.JButton();
@@ -71,9 +70,6 @@ public class panelCariPenghuni extends javax.swing.JPanel {
         labelNIM.setForeground(new java.awt.Color(255, 255, 255));
         labelNIM.setText("NIM");
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Teknik Informatika");
-
         labelNama.setForeground(new java.awt.Color(255, 255, 255));
         labelNama.setText("M Iqbal Revantama");
 
@@ -85,7 +81,6 @@ public class panelCariPenghuni extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNIM)
-                    .addComponent(jLabel6)
                     .addComponent(labelNama))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -96,8 +91,6 @@ public class panelCariPenghuni extends javax.swing.JPanel {
                 .addComponent(labelNama)
                 .addGap(18, 18, 18)
                 .addComponent(labelNIM)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -279,7 +272,6 @@ public class panelCariPenghuni extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCari;
     private javax.swing.JTextField fieldCari;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
