@@ -19,22 +19,22 @@ import pengguna.user;
  *
  * @author revan
  */
-public class panelSR2 extends javax.swing.JPanel {
+public class panelCariPenghuni extends javax.swing.JPanel {
     Connection con;
     user pengguna;
     /**
      * Creates new form panelSR
      */
-    public panelSR2() {
+    public panelCariPenghuni() {
         
         initComponents();
     }
     
-    public panelSR2(Connection con, user pengguna) {
+    public panelCariPenghuni(Connection con, user pengguna) {
         this.con = con;
         this.pengguna = pengguna;
         initComponents();
-        this.buttonCari.setVisible(false);
+        
         this.labelNama.setText(this.pengguna.getNama());
         this.labelNIM.setText(this.pengguna.getID());
     }
@@ -59,6 +59,7 @@ public class panelSR2 extends javax.swing.JPanel {
         tableCari = new javax.swing.JTable();
         labelCari = new javax.swing.JLabel();
         labelCariPenghuni = new javax.swing.JLabel();
+        jcariotomatis = new javax.swing.JRadioButton();
 
         setMinimumSize(new java.awt.Dimension(720, 560));
         setPreferredSize(new java.awt.Dimension(720, 560));
@@ -137,6 +138,13 @@ public class panelSR2 extends javax.swing.JPanel {
         labelCariPenghuni.setForeground(new java.awt.Color(116, 62, 0));
         labelCariPenghuni.setText("Cari Penghuni");
 
+        jcariotomatis.setText("cari otomatis");
+        jcariotomatis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcariotomatisActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -144,6 +152,7 @@ public class panelSR2 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcariotomatis)
                     .addComponent(labelCariPenghuni)
                     .addComponent(labelCari)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,9 +171,11 @@ public class panelSR2 extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCari))
-                .addGap(28, 28, 28)
+                .addGap(3, 3, 3)
+                .addComponent(jcariotomatis)
+                .addGap(8, 8, 8)
                 .addComponent(labelCari)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -189,6 +200,7 @@ public class panelSR2 extends javax.swing.JPanel {
     private void buttonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariActionPerformed
         // TODO add your handling code here:
         DAOuser dao = new DAOuser(this.con, this.pengguna);
+        
         ResultSet rs = dao.cariPenghuniAdv(this.fieldCari.getText());
         
         DefaultTableModel model= (DefaultTableModel) this.tableCari.getModel();
@@ -206,33 +218,68 @@ public class panelSR2 extends javax.swing.JPanel {
 
     private void tableCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCariMouseClicked
         // TODO add your handling code here:
-        JTable source = (JTable)evt.getSource();
-        int baris = source.rowAtPoint( evt.getPoint() );
-        String getKlik=source.getModel().getValueAt(baris, 0).toString();
+        
+        DefaultTableModel model= (DefaultTableModel) this.tableCari.getModel();
+            if(this.fieldCari.getText().isEmpty()){
+                model.setRowCount(0);
+            }else{
+                DAOuser dao = new DAOuser(this.con, this.pengguna);
+                ResultSet rs = dao.cariPenghuniAdv(this.fieldCari.getText());
+
+
+                model.setRowCount(0);
+                try {
+                    while(rs.next()){
+                        Object[]obj ={rs.getString("id_penghuni"), rs.getString("nama"), rs.getString("no_ruangan")};
+
+                        model.addRow(obj);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
     }//GEN-LAST:event_tableCariMouseClicked
 
     private void fieldCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariKeyReleased
         // TODO add your handling code here:
-        DefaultTableModel model= (DefaultTableModel) this.tableCari.getModel();
-        if(this.fieldCari.getText().isEmpty()){
-            model.setRowCount(0);
-        }else{
-            DAOuser dao = new DAOuser(this.con, this.pengguna);
-            ResultSet rs = dao.cariPenghuniAdv(this.fieldCari.getText());
+        if(this.jcariotomatis.isSelected()){
+            
+            
+            DefaultTableModel model= (DefaultTableModel) this.tableCari.getModel();
+            if(this.fieldCari.getText().isEmpty()){
+                model.setRowCount(0);
+            }else{
+                DAOuser dao = new DAOuser(this.con, this.pengguna);
+                ResultSet rs = dao.cariPenghuniAdv(this.fieldCari.getText());
 
-           
-            model.setRowCount(0);
-            try {
-                while(rs.next()){
-                    Object[]obj ={rs.getString("id_penghuni"), rs.getString("nama"), rs.getString("no_ruangan")};
 
-                    model.addRow(obj);
+                model.setRowCount(0);
+                try {
+                    while(rs.next()){
+                        Object[]obj ={rs.getString("id_penghuni"), rs.getString("nama"), rs.getString("no_ruangan")};
+
+                        model.addRow(obj);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
+        
+        
+        
     }//GEN-LAST:event_fieldCariKeyReleased
+
+    private void jcariotomatisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcariotomatisActionPerformed
+        // TODO add your handling code here:
+        if(this.jcariotomatis.isSelected()){
+            this.buttonCari.setVisible(false);
+        }else{
+            this.buttonCari.setVisible(true);          
+        }
+    }//GEN-LAST:event_jcariotomatisActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -242,6 +289,7 @@ public class panelSR2 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton jcariotomatis;
     private javax.swing.JLabel labelCari;
     private javax.swing.JLabel labelCariPenghuni;
     private javax.swing.JLabel labelNIM;

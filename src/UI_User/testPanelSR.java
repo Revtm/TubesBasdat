@@ -31,7 +31,7 @@ public class testPanelSR extends javax.swing.JFrame {
         this.con = kon.getConect();
         
         user penggunaa = new penghuniSR();
-        String sql = "select * from Penghuni_Asrama where id_penghuni = 'SR211170801';";
+        String sql = "select * from penghuni_asrama where id_penghuni = 'SR211170801';";
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -50,6 +50,8 @@ public class testPanelSR extends javax.swing.JFrame {
         initComponents();
         this.panelSR2.setVisible(false);
         
+        setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -66,7 +68,7 @@ public class testPanelSR extends javax.swing.JFrame {
         buttonCari = new javax.swing.JButton();
         buttonMain = new javax.swing.JButton();
         panelSR = new UI_User.panelSR(this.con,this.pengguna);
-        panelSR2 = new UI_User.panelSR2(this.con,this.pengguna);
+        panelSR2 = new UI_User.panelCariPenghuni(this.con,this.pengguna);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,6 +226,6 @@ public class testPanelSR extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private UI_User.panelSR panelSR;
-    private UI_User.panelSR2 panelSR2;
+    private UI_User.panelCariPenghuni panelSR2;
     // End of variables declaration//GEN-END:variables
 }

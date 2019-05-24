@@ -25,9 +25,8 @@ import pengguna.user;
 public class panelSR extends javax.swing.JPanel {
     Connection con;
     user pengguna;
-    panelSR2 pn2;
-    
-     HashMap <user> semua_penghuni;
+    //panelSR2 pn2;
+    ArrayList <user> semua_penghuni;
     /**
      * Creates new form panelSR
      */
@@ -38,7 +37,7 @@ public class panelSR extends javax.swing.JPanel {
     public panelSR(Connection con, user pengguna) {
         this.con = con;
         this.pengguna = pengguna;
-        this.pn2 = pn2;
+
         initComponents();
         this.labelNama.setText(this.pengguna.getNama());
         this.labelNIM.setText(this.pengguna.getID());
@@ -213,8 +212,12 @@ public class panelSR extends javax.swing.JPanel {
         JTable source = (JTable)evt.getSource();
         int baris = source.rowAtPoint( evt.getPoint() );
         int kolom = 0;
-        String getKlik=source.getModel().getValueAt(baris, kolom).toString();
+        int getKlik=source.getSelectedRow();
         
+        panelIdentitas panelId = new panelIdentitas(this.semua_penghuni, getKlik);
+        panelId.setVisible(true);
+        
+        System.out.println(getKlik);
         
     }//GEN-LAST:event_tableBinaMouseClicked
 
@@ -237,9 +240,10 @@ public class panelSR extends javax.swing.JPanel {
     
     private void tampilTabelBina(Connection con, user pengguna){
         DAOuser dao = new DAOuser(this.con, this.pengguna);
-        HashMap <String,user> all_penghuni = dao.tampilBinaanSR();
+        ArrayList <user> all_penghuni = dao.tampilBinaanSR();
         
         this.semua_penghuni = all_penghuni;
+        
         
         DefaultTableModel model= (DefaultTableModel) this.tableBina.getModel();
         

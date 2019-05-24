@@ -58,7 +58,7 @@ public class penghuniSR extends user {
         this.kota = x;
     }
     
-    public String get(){
+    public String getKota(){
         return this.kota;
     }
     

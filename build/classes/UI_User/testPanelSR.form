@@ -150,9 +150,9 @@
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UI_User.panelSR(this.con,this.pengguna)"/>
           </AuxValues>
         </Component>
-        <Component class="UI_User.panelSR2" name="panelSR2">
+        <Component class="UI_User.panelCariPenghuni" name="panelSR2">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UI_User.panelSR2(this.con,this.pengguna)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new UI_User.panelCariPenghuni(this.con,this.pengguna)"/>
           </AuxValues>
         </Component>
       </SubComponents>

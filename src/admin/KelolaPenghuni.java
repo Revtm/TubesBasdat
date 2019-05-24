@@ -30,7 +30,6 @@ public class KelolaPenghuni extends javax.swing.JFrame {
            email, prov, kota, jalan, id_sr_pembina;
     
     public KelolaPenghuni() {
-        initComponents();
         setLocationRelativeTo(null);
         model = new DefaultTableModel();
         penghuni_asrama.setModel(model);
@@ -46,6 +45,8 @@ public class KelolaPenghuni extends javax.swing.JFrame {
         model.addColumn("Alamat");
         model.addColumn("ID SR");
         getData();
+        initComponents();
+
         
     }
     

@@ -47,7 +47,7 @@ public class DAOuser {
     private ArrayList<String> getPenyakit(String id){
         ArrayList<String> penghuni = new ArrayList();
         
-        String sql = "select penyakit from riwayat_penyakit_Penghuni where id = '"+id +"';";
+        String sql = "select penyakit from riwayat_penyakit_penghuni where id = '"+id +"';";
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -65,13 +65,13 @@ public class DAOuser {
         return penghuni;
     }
     
-    public HashMap tampilBinaanSR(){
-        String sql = "select * from Penghuni_Asrama where id_sr_pembina='"+this.Pengguna.getID()+"';";
+    public ArrayList tampilBinaanSR(){
+        String sql = "select * from penghuni_asrama where id_sr_pembina='"+this.Pengguna.getID()+"';";
         String sql2;
         
         Statement stmt,stmt2;
         ResultSet rs;
-        HashMap <String ,user> all_penghuni= new HashMap();
+        ArrayList <user> all_penghuni= new ArrayList();
                 
         user penghuni;
         
@@ -94,7 +94,7 @@ public class DAOuser {
                 ((penghuniSR)penghuni).setTglLahir(rs.getString("tgl_lahir"));
                 ((penghuniSR)penghuni).setNoRuang(rs.getString("no_ruangan"));
                 
-                all_penghuni.put(penghuni.getID(),penghuni);
+                all_penghuni.add(penghuni);
                 
             }
             
@@ -109,7 +109,7 @@ public class DAOuser {
     }
     
     public ResultSet cariPenghuniAdv(String cari){
-        String sql = "select id_penghuni,nama,no_ruangan from Penghuni_Asrama where nama like '%"+cari+"%' OR id_penghuni like '%"+cari+"%';";
+        String sql = "select id_penghuni,nama,no_ruangan from penghuni_asrama where nama like '%"+cari+"%' OR id_penghuni like '%"+cari+"%';";
         
         Statement stmt;
         ResultSet rs = null;

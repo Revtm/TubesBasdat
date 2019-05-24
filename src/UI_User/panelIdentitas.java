@@ -5,7 +5,9 @@
  */
 package UI_User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import pengguna.penghuniSR;
 import pengguna.user;
 
 /**
@@ -13,7 +15,7 @@ import pengguna.user;
  * @author revan
  */
 public class panelIdentitas extends javax.swing.JFrame {
-    HashMap <String,user> identitas_penghuni;
+    ArrayList <user> identitas_penghuni;
     /**
      * Creates new form panelIdentitas
      */
@@ -21,9 +23,22 @@ public class panelIdentitas extends javax.swing.JFrame {
         initComponents();
     }
     
-    public panelIdentitas(HashMap<String, user> identitas) {
-        
+    public panelIdentitas(ArrayList<user> identitas, int i) {
+        this.identitas_penghuni = identitas;
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        this.isiNama.setText(this.identitas_penghuni.get(i).getNama());
+        this.isiNIM.setText(this.identitas_penghuni.get(i).getID());
+        this.isiJK.setText(((penghuniSR)this.identitas_penghuni.get(i)).getJK());
+        this.isiTgl.setText(((penghuniSR)this.identitas_penghuni.get(i)).getTglLahir());
+        this.isiKamar.setText(((penghuniSR)this.identitas_penghuni.get(i)).getNoRuang());
+        this.isiAlamat.setText(((penghuniSR)this.identitas_penghuni.get(i)).getJalan() + ", " + ((penghuniSR)this.identitas_penghuni.get(i)).getKota() +", "+ ((penghuniSR)this.identitas_penghuni.get(i)).getProv());
+        this.isiEmail.setText(this.identitas_penghuni.get(i).getEmail());
+        this.isiNoTelp.setText(this.identitas_penghuni.get(i).getNoTelp());
+        this.isiPenyakit.setText(((penghuniSR)this.identitas_penghuni.get(i)).getPenyakit().toString());
+        
     }
 
     /**
@@ -52,6 +67,12 @@ public class panelIdentitas extends javax.swing.JFrame {
         isiEmail = new javax.swing.JLabel();
         isiNoTelp = new javax.swing.JLabel();
         isiAlamat = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        isiPenyakit = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        buttonOK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +118,63 @@ public class panelIdentitas extends javax.swing.JFrame {
         isiAlamat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         isiAlamat.setText("Nama:");
 
+        jLabel9.setText("Riwayat Penyakit:");
+
+        isiPenyakit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        isiPenyakit.setText("Nama:");
+
+        jPanel2.setBackground(new java.awt.Color(194, 140, 83));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("Identitas Penghuni");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(194, 140, 83));
+
+        buttonOK.setBackground(new java.awt.Color(116, 62, 0));
+        buttonOK.setForeground(new java.awt.Color(255, 255, 255));
+        buttonOK.setText("OK");
+        buttonOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOKActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(279, 279, 279)
+                .addComponent(buttonOK, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(buttonOK)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,8 +189,9 @@ public class panelIdentitas extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel7)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel8))
-                .addGap(70, 70, 70)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(isiAlamat)
                     .addComponent(isiNoTelp)
@@ -121,13 +200,17 @@ public class panelIdentitas extends javax.swing.JFrame {
                     .addComponent(isiTgl)
                     .addComponent(isiJK)
                     .addComponent(isiNIM)
-                    .addComponent(isiNama))
-                .addContainerGap(414, Short.MAX_VALUE))
+                    .addComponent(isiNama)
+                    .addComponent(isiPenyakit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNama)
                     .addComponent(isiNama))
@@ -147,7 +230,7 @@ public class panelIdentitas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(isiKamar))
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(isiEmail))
@@ -159,7 +242,12 @@ public class panelIdentitas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(isiAlamat))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(isiPenyakit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,6 +267,11 @@ public class panelIdentitas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +309,7 @@ public class panelIdentitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonOK;
     private javax.swing.JLabel isiAlamat;
     private javax.swing.JLabel isiEmail;
     private javax.swing.JLabel isiJK;
@@ -223,7 +317,9 @@ public class panelIdentitas extends javax.swing.JFrame {
     private javax.swing.JLabel isiNIM;
     private javax.swing.JLabel isiNama;
     private javax.swing.JLabel isiNoTelp;
+    private javax.swing.JLabel isiPenyakit;
     private javax.swing.JLabel isiTgl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -231,7 +327,10 @@ public class panelIdentitas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel labelNama;
     // End of variables declaration//GEN-END:variables
 }
