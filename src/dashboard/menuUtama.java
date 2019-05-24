@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package dashboard;
+import UI_User.testPanelSR;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import tubesbasdat.conect;
+import admin.HalamanAdmin;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ import javax.swing.table.*;
  */
 public class menuUtama extends javax.swing.JFrame {
     DefaultTableModel model;
+    Connection con;
     /**
      * Creates new form menuUtama
      */
@@ -47,7 +50,7 @@ public class menuUtama extends javax.swing.JFrame {
         
         try{
             
-            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama_v3","root","");
+            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost/asrama_v4","root","");
             Statement stat =con.createStatement();
             if(status.getSelectedItem()=="Senior"){
                 String sql = "SELECT * FROM penghuni_asrama where id_penghuni like 'SR%' and nama like '"+tulis.getText()+"%'";
@@ -93,6 +96,11 @@ public class menuUtama extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        u = new javax.swing.JTextField();
+        login = new javax.swing.JButton();
+        p = new javax.swing.JPasswordField();
         tulis = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cari = new javax.swing.JButton();
@@ -100,13 +108,32 @@ public class menuUtama extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelASM = new javax.swing.JTable();
-        login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Utama");
         setPreferredSize(new java.awt.Dimension(810, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Username");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Password");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
+        getContentPane().add(u, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 150, -1));
+
+        login.setText("login");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, -1, -1));
+        getContentPane().add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 160, -1));
         getContentPane().add(tulis, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 344, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -147,14 +174,6 @@ public class menuUtama extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 440, 150));
 
-        login.setText("Login");
-        login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
-            }
-        });
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/asrama.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 870, 470));
 
@@ -176,8 +195,36 @@ public class menuUtama extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
-        //dispose();
-        new login().show();
+        conect kon = new conect();
+        this.con=kon.getConect();
+        
+        try{
+            Statement stat=this.con.createStatement();
+            String sql_1 = "select * from akun where id_akun ='"+u.getText()
+                    +"' and password ='"+p.getText()+"'";
+            ResultSet rset= stat.executeQuery(sql_1);
+                   
+            if (rset.next()){
+                if(u.getText().contains("SR")){
+                    dispose();
+                testPanelSR test = new testPanelSR();
+                test.setVisible(true);
+                }else if(u.getText().contains("JR")){
+                    dispose();
+                //testPanelJR test = new testPanelJR(); MENUNGGU PANEL JR
+                //test.setVisible(true);
+                }else if(u.getText().contains("AD")){
+                    dispose();
+                HalamanAdmin test = new HalamanAdmin();
+                test.setVisible(true);
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Maaf Password Atau Username Salah");
+            }
+        }catch(SQLException er){
+            JOptionPane.showMessageDialog(null, er.getMessage());
+        }
     }//GEN-LAST:event_loginActionPerformed
 
     /**
@@ -220,10 +267,14 @@ public class menuUtama extends javax.swing.JFrame {
     private javax.swing.JButton cari;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton login;
+    private javax.swing.JPasswordField p;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField tulis;
+    private javax.swing.JTextField u;
     // End of variables declaration//GEN-END:variables
 }

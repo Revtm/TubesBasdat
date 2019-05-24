@@ -1,5 +1,6 @@
 # TubesBasdat
 
+<b ><i > (PENTING!) untuk menghindari file conflict, harap mengedit hanya bagian tugasnya saja dan jangan mengedit file </br > milik anggota lain</i > </b > </br > 
 <b ><i > (jika ingin) Silakan mencatat histori perubahan project di sini, terimakasih wkwk </i > </b > </br > 
 
 <b > <u >Histori Perubahan </u > </b > </br >
@@ -10,3 +11,5 @@
 #Revisi class login dan menuUtama 19/05/2019 (mhafidhhaq) </br >
 #tambah dan perbaiki kode program </br >
 #tambah dan edit tampilan menu </br >
+#penggabungan panel mainpage dan pencarian di halaman SR (Revtm) 22/05/2019 </br >
+#percobaan automatic search after key realesed pada halaman SR (Revtm) 22/05/2019 </br >
