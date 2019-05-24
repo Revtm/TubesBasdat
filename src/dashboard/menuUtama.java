@@ -216,7 +216,7 @@ public class menuUtama extends javax.swing.JFrame {
                 test.setVisible(true);
                 }else if(u.getText().contains("AD")){
                     dispose();
-                HalamanAdmin test = new HalamanAdmin();
+                HalamanAdmin test = new HalamanAdmin(u.getText());
                 test.setVisible(true);
                 }
                 
