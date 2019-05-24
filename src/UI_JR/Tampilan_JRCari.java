@@ -23,18 +23,19 @@ import pengguna.user;
  *
  * @author Windows 10
  */
-public class Tampilan_JR1 extends javax.swing.JFrame {
+public class Tampilan_JRCari extends javax.swing.JFrame {
     private Connection kon;
     private  String id1;
     user JRutama;
+    
     /**
      * Creates new form Tampilan_JR
      */
-    public Tampilan_JR1() {
+    public Tampilan_JRCari() {
         initComponents();
     }
     
-    public Tampilan_JR1 (Connection c, String id){
+    public Tampilan_JRCari (Connection c, String id){
         kon=c;
         this.id1=id; 
         user JR = new penghuniSR();
@@ -42,6 +43,7 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         JRutama=JR;
         initComponents();
         biodata();
+      
         
     }
     
@@ -62,7 +64,23 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         }
     }
     
-    
+    public void cari(){
+        DefaultTableModel model = (DefaultTableModel) Tabelcari.getModel();
+        try {
+            Statement stat = kon.createStatement();
+            String sql = "select * from penghuni_asrama where nama like '"+cari1.getText()+"%'";
+            ResultSet rset = stat.executeQuery(sql);
+            model.setRowCount(0);
+            while(rset.next()){
+                Object[] obj = {rset.getString("id_penghuni"),rset.getString("nama"),rset.getString("no_ruangan"),rset.getString("no_telp")};
+                model.addRow(obj);
+            
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
     
     
 
@@ -76,6 +94,10 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        cari1 = new javax.swing.JTextField();
+        tombolcari = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabelcari = new javax.swing.JTable();
         JR1 = new javax.swing.JPanel();
         nama = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -87,15 +109,52 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tombolcari.setText("cari");
+        tombolcari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolcariActionPerformed(evt);
+            }
+        });
+
+        Tabelcari.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nama", "No. Kamar", "kontak"
+            }
+        ));
+        jScrollPane1.setViewportView(Tabelcari);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(cari1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(tombolcari))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tombolcari))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         JR1.setBackground(new java.awt.Color(194, 140, 83));
@@ -220,9 +279,12 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
 
     private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
         // TODO add your handling code here:
-        new Tampilan_JRCari(kon, id1).show();
-        dispose();
     }//GEN-LAST:event_cariActionPerformed
+
+    private void tombolcariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolcariActionPerformed
+        // TODO add your handling code here:
+        cari();
+    }//GEN-LAST:event_tombolcariActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -247,14 +309,18 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JRCari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JRCari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JRCari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JRCari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -263,20 +329,24 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tampilan_JR1().setVisible(true);
+                new Tampilan_JRCari().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JR1;
+    private javax.swing.JTable Tabelcari;
     private javax.swing.JButton cari;
+    private javax.swing.JTextField cari1;
     private javax.swing.JLabel id;
     private javax.swing.JButton info;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nama;
     private javax.swing.JButton profil;
+    private javax.swing.JButton tombolcari;
     // End of variables declaration//GEN-END:variables
 }

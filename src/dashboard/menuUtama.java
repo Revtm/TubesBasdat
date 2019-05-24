@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dashboard;
+import UI_JR.Tampilan_JR1;
 import UI_User.testPanelSR;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,8 +46,8 @@ public class menuUtama extends javax.swing.JFrame {
     }
     
     public void tampilan(){
-        model.getDataVector().removeAllElements();
-        model.fireTableDataChanged();
+        //model.getDataVector().removeAllElements();
+        //model.fireTableDataChanged();
         
         try{
             
@@ -211,8 +212,8 @@ public class menuUtama extends javax.swing.JFrame {
                 test.setVisible(true);
                 }else if(u.getText().contains("JR")){
                     dispose();
-                //testPanelJR test = new testPanelJR(); MENUNGGU PANEL JR
-                //test.setVisible(true);
+                Tampilan_JR1 test = new Tampilan_JR1(con, u.getText()); 
+                test.setVisible(true);
                 }else if(u.getText().contains("AD")){
                     dispose();
                 HalamanAdmin test = new HalamanAdmin();

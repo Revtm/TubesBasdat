@@ -23,26 +23,26 @@ import pengguna.user;
  *
  * @author Windows 10
  */
-public class Tampilan_JR1 extends javax.swing.JFrame {
+public class Tampilan_JR_Tutor extends javax.swing.JFrame {
     private Connection kon;
     private  String id1;
-    user JRutama;
+    user Jrutama;
     /**
      * Creates new form Tampilan_JR
      */
-    public Tampilan_JR1() {
+    public Tampilan_JR_Tutor() {
         initComponents();
     }
     
-    public Tampilan_JR1 (Connection c, String id){
+    public Tampilan_JR_Tutor (Connection c, String id){
         kon=c;
-        this.id1=id; 
+        this.id1=id;
         user JR = new penghuniSR();
         JR.setID(id);
-        JRutama=JR;
+        Jrutama=JR;
         initComponents();
         biodata();
-        
+        table();
     }
     
     public void biodata(){
@@ -62,7 +62,30 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         }
     }
     
-    
+    public void table (){
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+         model.setRowCount(0);
+         
+        try{
+            Statement stat = kon.createStatement();
+            String sql_1 = "select matakuliah, id_kelas, jadwal from kelastutor where id_kelas in (select id_tutor from belajar where id_jr='"+id1+"')";
+            ResultSet rset1 = stat.executeQuery(sql_1);
+            
+            Object[] obj=new Object[4];
+            while (rset1.next()){
+                
+                obj[0]=rset1.getString("matakuliah");
+                obj[1]=rset1.getString("id_kelas");
+                obj[2]=rset1.getString("jadwal");
+                model.addRow(obj); 
+         
+            }
+           
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+    }
     
     
 
@@ -76,26 +99,56 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         JR1 = new javax.swing.JPanel();
         nama = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
-        info = new javax.swing.JButton();
+        tutor = new javax.swing.JButton();
         profil = new javax.swing.JButton();
-        cari = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Jadwal Tutor JR Asrama");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mata Kuliah", "Id_Mata_Kuliah", "Jadwal"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(378, Short.MAX_VALUE))
         );
 
         JR1.setBackground(new java.awt.Color(194, 140, 83));
@@ -107,10 +160,10 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
 
         id.setText("Id");
 
-        info.setText("Info Kelas Tutor");
-        info.addActionListener(new java.awt.event.ActionListener() {
+        tutor.setText("Jadwal Tutor");
+        tutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                infoActionPerformed(evt);
+                tutorActionPerformed(evt);
             }
         });
 
@@ -121,10 +174,10 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
             }
         });
 
-        cari.setText("Cari seluruh penghuni");
-        cari.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Cari seluruh penghuni");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cariActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -150,9 +203,9 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addGroup(JR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 28, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(JR1Layout.createSequentialGroup()
@@ -172,10 +225,10 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
                 .addGap(91, 91, 91)
                 .addComponent(profil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(info)
+                .addComponent(tutor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cari)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(111, 111, 111))
         );
@@ -187,9 +240,8 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(JR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,35 +252,34 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoActionPerformed
+    private void tutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutorActionPerformed
         // TODO add your handling code here:
-        Tampilan_JR_Tutor tutor=new Tampilan_JR_Tutor(kon, id1);
-        tutor.setVisible(true);
-        dispose();
         
-    }//GEN-LAST:event_infoActionPerformed
+    }//GEN-LAST:event_tutorActionPerformed
 
     private void profilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilActionPerformed
         // TODO add your handling code here:
-        DAOuser dao = new DAOuser(this.kon, this.JRutama);
+        DAOuser dao =new DAOuser(this.kon, this.Jrutama);
         
-        this.JRutama = dao.getIdentitas(id1);
-        
-        panelIdentitas idenJR = new panelIdentitas(JRutama);
+        this.Jrutama=dao.getIdentitas(id1);
+        panelIdentitas idenJR=new panelIdentitas(Jrutama);
+        Tampilan_JR1 jr = new Tampilan_JR1(kon, id1);
+       jr.setVisible(true);
         idenJR.setVisible(true);
+       dispose();
     }//GEN-LAST:event_profilActionPerformed
-
-    private void cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariActionPerformed
-        // TODO add your handling code here:
-        new Tampilan_JRCari(kon, id1).show();
-        dispose();
-    }//GEN-LAST:event_cariActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         new menuUtama().show();
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new Tampilan_JRCari(kon, id1).show();
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,14 +298,74 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JR_Tutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JR_Tutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JR_Tutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tampilan_JR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tampilan_JR_Tutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -263,20 +374,23 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tampilan_JR1().setVisible(true);
+                new Tampilan_JR_Tutor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JR1;
-    private javax.swing.JButton cari;
     private javax.swing.JLabel id;
-    private javax.swing.JButton info;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel nama;
     private javax.swing.JButton profil;
+    private javax.swing.JButton tutor;
     // End of variables declaration//GEN-END:variables
 }
