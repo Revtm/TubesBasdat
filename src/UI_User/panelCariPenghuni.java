@@ -219,25 +219,19 @@ public class panelCariPenghuni extends javax.swing.JPanel {
     private void tableCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCariMouseClicked
         // TODO add your handling code here:
         
-        DefaultTableModel model= (DefaultTableModel) this.tableCari.getModel();
-            if(this.fieldCari.getText().isEmpty()){
-                model.setRowCount(0);
-            }else{
-                DAOuser dao = new DAOuser(this.con, this.pengguna);
-                ResultSet rs = dao.cariPenghuniAdv(this.fieldCari.getText());
-
-
-                model.setRowCount(0);
-                try {
-                    while(rs.next()){
-                        Object[]obj ={rs.getString("id_penghuni"), rs.getString("nama"), rs.getString("no_ruangan")};
-
-                        model.addRow(obj);
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        JTable source = (JTable)evt.getSource();
+        int baris = source.rowAtPoint( evt.getPoint() );
+        int kolom = 0;
+        String getKlik=source.getValueAt(baris, kolom).toString();
+        
+        DAOuser dao = new DAOuser(this.con, this.pengguna);
+        
+        user identitas_dicari = dao.getIdentitas(getKlik);
+        
+        panelIdentitas panelId = new panelIdentitas(identitas_dicari);
+        panelId.setVisible(true);
+        
+        System.out.println(getKlik);
         
     }//GEN-LAST:event_tableCariMouseClicked
 

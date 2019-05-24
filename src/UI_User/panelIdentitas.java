@@ -23,6 +23,26 @@ public class panelIdentitas extends javax.swing.JFrame {
         initComponents();
     }
     
+    public panelIdentitas(user penghuni){
+        initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        this.isiNama.setText(penghuni.getNama());
+        this.isiNIM.setText(penghuni.getID());
+        this.isiEmail.setText(penghuni.getEmail());
+        this.isiNoTelp.setText(penghuni.getNoTelp());
+        if(!penghuni.getID().contains("AD")){
+            this.isiJK.setText(((penghuniSR)penghuni).getJK());
+            this.isiTgl.setText(((penghuniSR)penghuni).getTglLahir());
+            this.isiKamar.setText(((penghuniSR)penghuni).getNoRuang());
+            this.isiAlamat.setText(((penghuniSR)penghuni).getJalan() + ", " + ((penghuniSR)penghuni).getKota() +", "+ ((penghuniSR)penghuni).getProv());
+        
+        this.isiPenyakit.setText(((penghuniSR)penghuni).getPenyakit().toString());
+        }
+        
+    }
+    
     public panelIdentitas(ArrayList<user> identitas, int i) {
         this.identitas_penghuni = identitas;
         initComponents();

@@ -65,11 +65,49 @@ public class DAOuser {
         return penghuni;
     }
     
+    public user getIdentitas(String id){
+        user penghuni = new penghuniSR();
+        
+        String sql = "select * from penghuni_asrama where id_penghuni='"+id+"';";
+        
+        Statement stmt;
+        ResultSet rs;
+            
+        try {
+            stmt = this.con.createStatement();
+
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                
+                penghuni.setNama(rs.getString("nama"));
+                penghuni.setID(rs.getString("id_penghuni"));
+                ((penghuniSR)penghuni).setPenyakit(this.getPenyakit(penghuni.getID()));               
+                penghuni.setEmail(rs.getString("email"));
+                penghuni.setNoTelp(rs.getString("no_telp"));
+                ((penghuniSR)penghuni).setJK(rs.getString("Jenis_kelamin"));
+                ((penghuniSR)penghuni).setJalan(rs.getString("jalan"));
+                ((penghuniSR)penghuni).setKota(rs.getString("kota"));
+                ((penghuniSR)penghuni).setProv(rs.getString("prov"));
+                ((penghuniSR)penghuni).setTglLahir(rs.getString("tgl_lahir"));
+                ((penghuniSR)penghuni).setNoRuang(rs.getString("no_ruangan"));
+                
+            }
+            
+            stmt.close();
+             
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOuser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+        return penghuni;
+    }
+    
     public ArrayList tampilBinaanSR(){
         String sql = "select * from penghuni_asrama where id_sr_pembina='"+this.Pengguna.getID()+"';";
-        String sql2;
         
-        Statement stmt,stmt2;
+        Statement stmt;
         ResultSet rs;
         ArrayList <user> all_penghuni= new ArrayList();
                 
@@ -109,7 +147,7 @@ public class DAOuser {
     }
     
     public ResultSet cariPenghuniAdv(String cari){
-        String sql = "select id_penghuni,nama,no_ruangan from penghuni_asrama where nama like '%"+cari+"%' OR id_penghuni like '%"+cari+"%';";
+        String sql = "select id_penghuni,nama,no_ruangan from penghuni_asrama where nama like '"+cari+"%' OR id_penghuni like '%"+cari+"%';";
         
         Statement stmt;
         ResultSet rs = null;
