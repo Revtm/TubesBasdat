@@ -5,6 +5,8 @@
  */
 package pengguna;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author revan
@@ -18,6 +20,7 @@ public class penghuniSR extends user {
     String jalan;
     String id_paket;
     String no_telp_ortu;
+    ArrayList <String> riwayat_penyakit;
     
     public void setTglLahir(String x){
         this.tgl_lahir = x;
@@ -81,6 +84,14 @@ public class penghuniSR extends user {
     
     public String getTelpOrtu(){
         return this.no_telp_ortu;
+    }
+    
+    public void setPenyakit(ArrayList<String> x){
+        this.riwayat_penyakit = x;
+    }
+    
+    public ArrayList getPenyakit(){
+        return this.riwayat_penyakit;
     }
     
 }

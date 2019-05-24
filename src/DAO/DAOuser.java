@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pengguna.penghuniSR;
 import pengguna.user;
 
 /**
@@ -41,19 +44,68 @@ public class DAOuser {
         return rs;
     }
     
-    public ResultSet tampilBinaanSR(){
-        String sql = "select * from Penghuni_Asrama where id_sr_pembina='"+this.Pengguna.getID()+"';";
+    private ArrayList<String> getPenyakit(String id){
+        ArrayList<String> penghuni = new ArrayList();
         
-        Statement stmt;
-        ResultSet rs = null;
+        String sql = "select penyakit from riwayat_penyakit_Penghuni where id = '"+id +"';";
         try {
-            stmt = this.con.createStatement();
-            rs = stmt.executeQuery(sql);
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                penghuni.add(rs.getString("penyakit"));
+            }
+            
+            stmt.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOuser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rs;
+        
+        return penghuni;
+    }
+    
+    public HashMap tampilBinaanSR(){
+        String sql = "select * from Penghuni_Asrama where id_sr_pembina='"+this.Pengguna.getID()+"';";
+        String sql2;
+        
+        Statement stmt,stmt2;
+        ResultSet rs;
+        HashMap <String ,user> all_penghuni= new HashMap();
+                
+        user penghuni;
+        
+        try {
+            stmt = this.con.createStatement();
+
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                penghuni = new penghuniSR();
+                
+                penghuni.setNama(rs.getString("nama"));
+                penghuni.setID(rs.getString("id_penghuni"));
+                ((penghuniSR)penghuni).setPenyakit(this.getPenyakit(penghuni.getID()));               
+                penghuni.setEmail(rs.getString("email"));
+                penghuni.setNoTelp(rs.getString("no_telp"));
+                ((penghuniSR)penghuni).setJK(rs.getString("Jenis_kelamin"));
+                ((penghuniSR)penghuni).setJalan(rs.getString("jalan"));
+                ((penghuniSR)penghuni).setKota(rs.getString("kota"));
+                ((penghuniSR)penghuni).setProv(rs.getString("prov"));
+                ((penghuniSR)penghuni).setTglLahir(rs.getString("tgl_lahir"));
+                ((penghuniSR)penghuni).setNoRuang(rs.getString("no_ruangan"));
+                
+                all_penghuni.put(penghuni.getID(),penghuni);
+                
+            }
+            
+            stmt.close();
+             
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOuser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return all_penghuni;
     }
     
     public ResultSet cariPenghuniAdv(String cari){

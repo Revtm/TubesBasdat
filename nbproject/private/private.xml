@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Informatika/Smester%204/Basis%20Data/TUBES/TubesBasdat/src/tubesbasdat/TubesBasdat.java</file>
-            <file>file:/D:/Informatika/Smester%204/Basis%20Data/TUBES/TubesBasdat/src/dashboard/menuUtama.java</file>
-            <file>file:/D:/Informatika/Smester%204/Basis%20Data/TUBES/TubesBasdat/src/dashboard/login.java</file>
-            <file>file:/D:/Informatika/Smester%204/Basis%20Data/TUBES/TubesBasdat/src/tubesbasdat/conect.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/testPanelSR.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/panelSR.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/UI_User/panelIdentitas.java</file>
+            <file>file:/home/revan/github/tubesbaru/TubesBasdat/src/DAO/DAOuser.java</file>
         </group>
     </open-files>
 </project-private>

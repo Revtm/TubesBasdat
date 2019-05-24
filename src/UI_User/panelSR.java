@@ -9,9 +9,13 @@ import DAO.DAOuser;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import pengguna.penghuniSR;
 import pengguna.user;
 
 /**
@@ -22,6 +26,8 @@ public class panelSR extends javax.swing.JPanel {
     Connection con;
     user pengguna;
     panelSR2 pn2;
+    
+     HashMap <user> semua_penghuni;
     /**
      * Creates new form panelSR
      */
@@ -140,6 +146,11 @@ public class panelSR extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tableBina.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBinaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableBina);
 
         labelBina.setText("Anggota JR Binaan");
@@ -197,6 +208,16 @@ public class panelSR extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tableBinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBinaMouseClicked
+        // TODO add your handling code here:
+        JTable source = (JTable)evt.getSource();
+        int baris = source.rowAtPoint( evt.getPoint() );
+        int kolom = 0;
+        String getKlik=source.getModel().getValueAt(baris, kolom).toString();
+        
+        
+    }//GEN-LAST:event_tableBinaMouseClicked
+
     private void tampilTabelTutor(Connection con, user pengguna){
         DAOuser dao = new DAOuser(this.con, this.pengguna);
         ResultSet rs = dao.tampilTutorialSR();
@@ -216,18 +237,17 @@ public class panelSR extends javax.swing.JPanel {
     
     private void tampilTabelBina(Connection con, user pengguna){
         DAOuser dao = new DAOuser(this.con, this.pengguna);
-        ResultSet rs = dao.tampilBinaanSR();
+        HashMap <String,user> all_penghuni = dao.tampilBinaanSR();
+        
+        this.semua_penghuni = all_penghuni;
         
         DefaultTableModel model= (DefaultTableModel) this.tableBina.getModel();
-        try {
-            while(rs.next()){
-                Object[]obj ={rs.getString("nama"), rs.getString("no_ruangan"), rs.getString("no_telp")};
+        
+           for(user x : all_penghuni){
+                Object[]obj ={x.getID(), x.getNama(), ((penghuniSR)x).getNoRuang()};
                 
                 model.addRow(obj);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(panelSR.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }      
         
     }
 
