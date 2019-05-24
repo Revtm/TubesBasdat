@@ -6,6 +6,13 @@
 package admin;
 
 import dashboard.menuUtama;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import tubesbasdat.conect;
+
 
 /**
  *
@@ -16,11 +23,36 @@ public class HalamanAdmin extends javax.swing.JFrame {
     /**
      * Creates new form HalamanAdmin
      */
+    Connection con;
+    String id_admin, nama;
+    
     public HalamanAdmin() {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    
+    public HalamanAdmin(String id){
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        conect kon = new conect();
+        con = kon.getConect();
+        
+        try{
+            Statement stmt = (Statement) con.createStatement();
+            String sql ="SELECT id_admin, nama FROM admin WHERE id_admin = '" + id +"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                this.jLabel2.setText(rs.getString("id_admin"));
+                this.jLabel1.setText(rs.getString("nama"));
+            }
+        }catch (SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +65,7 @@ public class HalamanAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        kelola = new javax.swing.JButton();
+        kelolaJr = new javax.swing.JButton();
         profil = new javax.swing.JButton();
         logout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -53,19 +85,24 @@ public class HalamanAdmin extends javax.swing.JFrame {
         jLabel2.setText("ID");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        kelola.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        kelola.setText("Kelola Penghuni");
-        kelola.addActionListener(new java.awt.event.ActionListener() {
+        kelolaJr.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        kelolaJr.setText("Kelola Jr");
+        kelolaJr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kelolaActionPerformed(evt);
+                kelolaJrActionPerformed(evt);
             }
         });
-        jPanel1.add(kelola, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        jPanel1.add(kelolaJr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 140, -1));
 
         profil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         profil.setText("Lihat Profil");
         profil.setPreferredSize(new java.awt.Dimension(141, 29));
-        jPanel1.add(profil, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        profil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profilActionPerformed(evt);
+            }
+        });
+        jPanel1.add(profil, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         logout.setText("logout");
@@ -75,27 +112,27 @@ public class HalamanAdmin extends javax.swing.JFrame {
                 logoutActionPerformed(evt);
             }
         });
-        jPanel1.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
+        jPanel1.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 440));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 340));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/admin.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 440));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void kelolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kelolaActionPerformed
+    private void kelolaJrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kelolaJrActionPerformed
         // TODO add your handling code here:
         dispose();
-        KelolaPenghuni kelola = new KelolaPenghuni();
+        KelolaPenghuni kelola = new KelolaPenghuni(jLabel2.getText());
         kelola.setVisible(true);
-    }//GEN-LAST:event_kelolaActionPerformed
+    }//GEN-LAST:event_kelolaJrActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
@@ -103,6 +140,13 @@ public class HalamanAdmin extends javax.swing.JFrame {
         menuUtama menu = new menuUtama();
         menu.setVisible(true);
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void profilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LihatProfil profil = new LihatProfil(jLabel2.getText());
+        profil.setVisible(true);
+    }//GEN-LAST:event_profilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,7 +189,7 @@ public class HalamanAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton kelola;
+    private javax.swing.JButton kelolaJr;
     private javax.swing.JButton logout;
     private javax.swing.JButton profil;
     // End of variables declaration//GEN-END:variables
