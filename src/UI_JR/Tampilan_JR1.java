@@ -7,6 +7,7 @@ package UI_JR;
 
 import DAO.DAOuser;
 import UI_User.panelIdentitas;
+import UI_User.testList_paket;
 import dashboard.menuUtama;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -84,6 +85,7 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         profil = new javax.swing.JButton();
         cari = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        paketKatering = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +137,13 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
             }
         });
 
+        paketKatering.setText("Katering");
+        paketKatering.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paketKateringActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JR1Layout = new javax.swing.GroupLayout(JR1);
         JR1.setLayout(JR1Layout);
         JR1Layout.setHorizontalGroup(
@@ -152,7 +161,8 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(paketKatering, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 28, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(JR1Layout.createSequentialGroup()
@@ -175,6 +185,8 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
                 .addComponent(info)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cari)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(paketKatering)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(111, 111, 111))
@@ -230,6 +242,12 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void paketKateringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paketKateringActionPerformed
+        // TODO add your handling code here:
+        testList_paket paket= new testList_paket(this.kon, this.JRutama);
+        paket.setVisible(true);
+    }//GEN-LAST:event_paketKateringActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,6 +295,7 @@ public class Tampilan_JR1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nama;
+    private javax.swing.JButton paketKatering;
     private javax.swing.JButton profil;
     // End of variables declaration//GEN-END:variables
 }
