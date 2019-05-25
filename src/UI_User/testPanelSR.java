@@ -104,6 +104,7 @@ public class testPanelSR extends javax.swing.JFrame {
         buttonMain = new javax.swing.JButton();
         buttonProfil = new javax.swing.JButton();
         buttonLogout = new javax.swing.JButton();
+        buttonpaket = new javax.swing.JButton();
         panelSR = new UI_User.panelSR(this.con,this.pengguna);
         panelSR2 = new UI_User.panelCariPenghuni(this.con,this.pengguna);
 
@@ -147,6 +148,15 @@ public class testPanelSR extends javax.swing.JFrame {
             }
         });
 
+        buttonpaket.setBackground(new java.awt.Color(116, 62, 0));
+        buttonpaket.setForeground(new java.awt.Color(255, 255, 255));
+        buttonpaket.setText("katering");
+        buttonpaket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonpaketActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -154,10 +164,11 @@ public class testPanelSR extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonCari, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(buttonMain, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(buttonProfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(buttonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                    .addComponent(buttonCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonProfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonpaket, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,10 +179,12 @@ public class testPanelSR extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(buttonProfil)
                 .addGap(18, 18, 18)
+                .addComponent(buttonpaket)
+                .addGap(18, 18, 18)
                 .addComponent(buttonCari)
                 .addGap(18, 18, 18)
                 .addComponent(buttonLogout)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -271,6 +284,14 @@ public class testPanelSR extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
+    private void buttonpaketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonpaketActionPerformed
+        // TODO add your handling code here:
+        testList_paket paket = new testList_paket(this.con,this.pengguna);
+        paket.setVisible(rootPaneCheckingEnabled);
+        
+        
+    }//GEN-LAST:event_buttonpaketActionPerformed
+
     
     /**
      * @param args the command line arguments173, 92, 0
@@ -312,6 +333,7 @@ public class testPanelSR extends javax.swing.JFrame {
     private javax.swing.JButton buttonLogout;
     private javax.swing.JButton buttonMain;
     private javax.swing.JButton buttonProfil;
+    private javax.swing.JButton buttonpaket;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private UI_User.panelSR panelSR;
