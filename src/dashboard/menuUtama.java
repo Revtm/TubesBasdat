@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package dashboard;
-import UI_JR.Tampilan_JR1;
+import UI_JRhiskia.*;
 import UI_User.testPanelSR;
 import java.sql.Connection;
 import java.sql.DriverManager;
