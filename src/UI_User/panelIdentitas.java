@@ -102,7 +102,7 @@ public class panelIdentitas extends javax.swing.JFrame {
 
         jLabel2.setText("NIM :");
 
-        jLabel3.setText("No Telp :");
+        jLabel3.setText("Telp Ortu:");
 
         jLabel4.setText("Kamar :");
 
